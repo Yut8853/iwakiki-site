@@ -1,0 +1,6 @@
+@import "./reset.css";
+
+body {
+  overflow: hidden;
+  margin: 0;
+}
