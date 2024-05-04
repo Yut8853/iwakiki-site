@@ -116,9 +116,27 @@ module.exports = (env, argv) => {
       }),
       new CopyPlugin({
         patterns: [
-          { from: "src/assets/shaders", to: "assets/shaders" },
-          { from: "src/assets/textures", to: "assets/textures" },
-          { from: "src/assets/images", to: "assets/images" },
+          {
+            from: "src/assets/textures",
+            to: "assets/textures",
+            noErrorOnMissing: true,
+          },
+          {
+            from: "src/assets/fonts",
+            to: "assets/fonts",
+            noErrorOnMissing: true,
+          },
+          {
+            from: "src/assets/images",
+            to: "assets/images",
+            noErrorOnMissing: true,
+          },
+          {
+            from: "src/assets/shaders",
+            to: "assets/shaders",
+            noErrorOnMissing: true,
+          },
+          // 他の必要なパターンも同様に追加
         ],
       }),
     ],

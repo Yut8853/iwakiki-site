@@ -4,9 +4,8 @@
   "description": "webpack初期設定",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development --watch",
-    "build": "webpack --mode production",
-    "start": "webpack serve "
+    "dev": "webpack serve --mode development --watch",
+    "build": "webpack --mode production"
   },
   "keywords": [],
   "author": "",
@@ -47,6 +46,6 @@
     "@studio-freight/lenis": "^1.0.39",
     "glslify-hex": "^2.1.1",
     "lil-gui": "^0.19.1",
-    "three": "^0.162"
+    "three": "^0.142"
   }
 }

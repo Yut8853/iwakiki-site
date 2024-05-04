@@ -1,1 +1,3 @@
-import { render } from "./wave.js";
+import "./style.css";
+import { init } from "./wave.js";
+init();
