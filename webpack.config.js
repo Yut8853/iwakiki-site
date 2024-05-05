@@ -9,6 +9,10 @@ module.exports = (env, argv) => {
     mode: isProduction ? "production" : "development",
     entry: {
       main: path.resolve(__dirname, "./src/index.js"),
+      about: path.resolve(__dirname, "./src/about.js"),
+      guides: path.resolve(__dirname, "./src/guides.js"),
+      latestProperties: path.resolve(__dirname, "./src/latest-properties.js"),
+      saleRequest: path.resolve(__dirname, "./src/sale-request.js"),
     },
     output: {
       path: path.resolve(__dirname, "dist"),
@@ -105,12 +109,38 @@ module.exports = (env, argv) => {
       ],
     },
     plugins: [
-      new HtmlWebpackPlugin({
-        filename: "index.html",
-        template: "./src/index.html",
-        minify: true,
-        chunks: ["main"],
-      }),
+      new HtmlWebpackPlugin(
+        {
+          filename: "index.html",
+          template: "./src/index.html",
+          minify: true,
+          chunks: ["main"],
+        },
+        {
+          filename: "about.html",
+          template: "./src/about.html",
+          minify: true,
+          chunks: ["about"],
+        },
+        {
+          filename: "guides.html",
+          template: "./src/guides.html",
+          minify: true,
+          chunks: ["guides"],
+        },
+        {
+          filename: "latest-properties.html",
+          template: "./src/latest-properties.html",
+          minify: true,
+          chunks: ["latestProperties"],
+        },
+        {
+          filename: "sale-request.html",
+          template: "./src/sale-request.html",
+          minify: true,
+          chunks: ["saleRequest"],
+        }
+      ),
       new MiniCssExtractPlugin({
         filename: "[name].[contenthash].css",
       }),
@@ -136,7 +166,6 @@ module.exports = (env, argv) => {
             to: "assets/shaders",
             noErrorOnMissing: true,
           },
-          // 他の必要なパターンも同様に追加
         ],
       }),
     ],
