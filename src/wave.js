@@ -13,10 +13,6 @@ let timeUniform = {
   },
 };
 
-window.addEventListener("DOMContentLoaded", () => {
-  init();
-});
-
 function init() {
   scene = new THREE.Scene();
 
@@ -83,12 +79,18 @@ function render() {
   waveMaterial.uniforms.iGlobalTime.value = timeUniform.iGlobalTime.value;
   console.log(waveMaterial.uniforms.iGlobalTime.value);
   renderer.render(scene, camera);
+  if (renderer.info.render.errors > 0) {
+    console.error(
+      "WebGL rendering errors occurred:",
+      renderer.info.render.errors
+    );
+  }
   requestAnimationFrame(render);
 }
 
 export { init };
 
-const error = renderer.getError();
-if (error !== renderer.NO_ERROR) {
-  console.error("WebGL error: " + error);
-}
+// const error = renderer.getError();
+// if (error !== renderer.NO_ERROR) {
+//   console.error("WebGL error: " + error);
+// }

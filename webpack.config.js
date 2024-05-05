@@ -109,38 +109,36 @@ module.exports = (env, argv) => {
       ],
     },
     plugins: [
-      new HtmlWebpackPlugin(
-        {
-          filename: "index.html",
-          template: "./src/index.html",
-          minify: true,
-          chunks: ["main"],
-        },
-        {
-          filename: "about.html",
-          template: "./src/about.html",
-          minify: true,
-          chunks: ["about"],
-        },
-        {
-          filename: "guides.html",
-          template: "./src/guides.html",
-          minify: true,
-          chunks: ["guides"],
-        },
-        {
-          filename: "latest-properties.html",
-          template: "./src/latest-properties.html",
-          minify: true,
-          chunks: ["latestProperties"],
-        },
-        {
-          filename: "sale-request.html",
-          template: "./src/sale-request.html",
-          minify: true,
-          chunks: ["saleRequest"],
-        }
-      ),
+      new HtmlWebpackPlugin({
+        filename: "index.html",
+        template: "./src/index.html",
+        minify: isProduction,
+        chunks: ["main"],
+      }),
+      new HtmlWebpackPlugin({
+        filename: "about.html",
+        template: "./src/about.html",
+        minify: isProduction,
+        chunks: ["about"],
+      }),
+      new HtmlWebpackPlugin({
+        filename: "guides.html",
+        template: "./src/guides.html",
+        minify: isProduction,
+        chunks: ["guides"],
+      }),
+      new HtmlWebpackPlugin({
+        filename: "latest-properties.html",
+        template: "./src/latest-properties.html",
+        minify: isProduction,
+        chunks: ["latestProperties"],
+      }),
+      new HtmlWebpackPlugin({
+        filename: "sale-request.html",
+        template: "./src/sale-request.html",
+        minify: isProduction,
+        chunks: ["saleRequest"],
+      }),
       new MiniCssExtractPlugin({
         filename: "[name].[contenthash].css",
       }),

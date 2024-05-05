@@ -6,13 +6,14 @@ export function initializeHamburger() {
     document.body.classList.toggle("background--blur");
     icon.parentNode.nextElementSibling.classList.toggle("menu--on");
 
-    const child = icon.childNodes[1].classList;
-    if (child.contains("material-design-hamburger__icon--to-arrow")) {
-      child.remove("material-design-hamburger__icon--to-arrow");
-      child.add("material-design-hamburger__icon--from-arrow");
+    // querySelectorを使用して直接クラスリストにアクセス
+    const layer = icon.querySelector(".material-design-hamburger__layer");
+    if (layer.classList.contains("material-design-hamburger__icon--to-arrow")) {
+      layer.classList.remove("material-design-hamburger__icon--to-arrow");
+      layer.classList.add("material-design-hamburger__icon--from-arrow");
     } else {
-      child.remove("material-design-hamburger__icon--from-arrow");
-      child.add("material-design-hamburger__icon--to-arrow");
+      layer.classList.remove("material-design-hamburger__icon--from-arrow");
+      layer.classList.add("material-design-hamburger__icon--to-arrow");
     }
   });
 }
