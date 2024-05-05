@@ -20,7 +20,7 @@ export function removeTransition(elementId) {
   }
 }
 
-export function loadContent(elementId, url) {
+export function loadContent(elementId, url, shouldPushState = true) {
   const element = document.getElementById(elementId);
   if (!element) {
     console.error(
@@ -46,6 +46,11 @@ export function loadContent(elementId, url) {
 
         element.innerHTML = content;
         removeTransition(elementId); // ブラーとフェードの効果を解除
+
+        // URLと履歴を更新
+        if (shouldPushState) {
+          window.history.pushState({ path: url }, "", url);
+        }
       }, 500); // トランジションを見せるためのディレイ
     })
     .catch((error) => {
@@ -53,3 +58,10 @@ export function loadContent(elementId, url) {
       removeTransition(elementId); // エラー時もトランジションを解除
     });
 }
+
+// ブラウザの戻るボタン対応
+window.onpopstate = function (event) {
+  if (event.state) {
+    loadContent("content-container", event.state.path, false);
+  }
+};

@@ -33,7 +33,6 @@ body {
 .menu {
   font-size: 2em;
   font-family: "Roboto", sans-serif;
-  color: #333;
   position: absolute;
   z-index: 100;
 }
@@ -216,6 +215,24 @@ body {
   filter: drop-shadow(0.5px 0.5px 30px rgba(129, 202, 224, 0.3));
   overflow: hidden;
   transition: opacity 0.5s, filter 0.5s;
+  /* マスクの追加 */
+  -webkit-mask-image: url("./assets/images/map/map-bg.png");
+  mask-image: url("./assets/images/map/map-bg.png");
+  mask-size: cover;
+  mask-position: center;
+}
+
+.content-container {
+  /* スクロール可能なコンテナの設定 */
+  width: 100%; /* 親要素の幅に合わせる */
+  height: 100%; /* 親要素の高さに合わせる */
+  overflow: auto; /* コンテンツがはみ出した場合にスクロール可能に */
+  display: flex; /* 子要素を横並びに */
+  flex-direction: column; /* 子要素を縦並びに */
+  flex-wrap: wrap; /* 子要素を折り返し表示 */
+  justify-content: center; /* 子要素を中央寄せ */
+  align-items: center; /* 子要素を中央寄せ */
+  padding: 1em; /* 余白の設定 */
 }
 
 /* ブラーと透明度の低下を適用 */
