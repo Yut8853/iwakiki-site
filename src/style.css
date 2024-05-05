@@ -223,18 +223,15 @@ body {
 }
 
 .content-container {
-  /* スクロール可能なコンテナの設定 */
   width: 100%; /* 親要素の幅に合わせる */
   height: 100%; /* 親要素の高さに合わせる */
   overflow: auto; /* コンテンツがはみ出した場合にスクロール可能に */
   display: flex; /* 子要素を横並びに */
   flex-direction: column; /* 子要素を縦並びに */
-  flex-wrap: wrap; /* 子要素を折り返し表示 */
-  justify-content: center; /* 子要素を中央寄せ */
-  align-items: center; /* 子要素を中央寄せ */
+  flex-wrap: nowrap; /* 子要素を折り返し表示しない */
+  align-items: flex-start; /* 子要素を上端に揃える */
   padding: 1em; /* 余白の設定 */
 }
-
 /* ブラーと透明度の低下を適用 */
 .blur-and-fade {
   opacity: 0.5;
