@@ -1,10 +1,14 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
 const path = require("path");
 
-module.exports = (env, argv) => {
+module.exports = async (env, argv) => {
   const isProduction = argv.mode === "production";
+
+  // プラグインを動的にインポート
+  const HtmlWebpackPlugin = (await import("html-webpack-plugin")).default;
+  const MiniCssExtractPlugin = (await import("mini-css-extract-plugin"))
+    .default;
+  const CopyPlugin = (await import("copy-webpack-plugin")).default;
+
   return {
     mode: isProduction ? "production" : "development",
     entry: {
