@@ -1,19 +1,31 @@
 export function initializeHamburger() {
   document.addEventListener("click", function (event) {
     const icon = event.target.closest(".material-design-hamburger__icon");
-    if (!icon) return; // クリックされた要素がアイコンでなければ何もしない
+    const menu = document.querySelector(".menu");
+    const isContentLinkClicked = event.target.closest(".content-link");
+    const layer = document.querySelector(".material-design-hamburger__layer");
 
-    document.body.classList.toggle("background--blur");
-    icon.parentNode.nextElementSibling.classList.toggle("menu--on");
-
-    // querySelectorを使用して直接クラスリストにアクセス
-    const layer = icon.querySelector(".material-design-hamburger__layer");
-    if (layer.classList.contains("material-design-hamburger__icon--to-arrow")) {
+    // メニューアイコンをクリックした場合
+    if (icon) {
+      document.body.classList.toggle("background--blur");
+      menu.classList.toggle("menu--on");
+      if (menu.classList.contains("menu--on")) {
+        layer.classList.remove("material-design-hamburger__icon--from-arrow");
+        layer.classList.add("material-design-hamburger__icon--to-arrow");
+      } else {
+        layer.classList.remove("material-design-hamburger__icon--to-arrow");
+        layer.classList.add("material-design-hamburger__icon--from-arrow");
+      }
+    }
+    // 'content-link' クラスか他の場所をクリックした場合、メニューが開いていれば閉じる
+    else if (
+      menu.classList.contains("menu--on") &&
+      (isContentLinkClicked || !icon)
+    ) {
+      document.body.classList.remove("background--blur");
+      menu.classList.remove("menu--on");
       layer.classList.remove("material-design-hamburger__icon--to-arrow");
       layer.classList.add("material-design-hamburger__icon--from-arrow");
-    } else {
-      layer.classList.remove("material-design-hamburger__icon--from-arrow");
-      layer.classList.add("material-design-hamburger__icon--to-arrow");
     }
   });
 }
