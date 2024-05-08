@@ -4,9 +4,10 @@
   "description": "webpack初期設定",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development",
-    "build": "webpack --mode production",
-    "start": "webpack serve --mode development"
+    "clean": "rm -rf ./dist/*",
+    "dev": "npm run clean && webpack --mode development",
+    "build": "npm run clean && webpack --mode production",
+    "start": "npm run clean && webpack serve --mode development"
   },
   "keywords": [],
   "author": "",

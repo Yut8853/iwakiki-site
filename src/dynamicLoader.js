@@ -1,13 +1,15 @@
-// dynamicLoader.js
+// ページとスクリプトのマッピング
+const scriptLoaders = {
+  "latest-properties": () => import("./horizontalScroll.js"),
+};
 
-export function loadContent(elementId, pageName, shouldPushState = true) {
+export function init(elementId, pageName, shouldPushState = true) {
   const container = document.getElementById(elementId);
   if (!container) {
     console.error(`Element with id '${elementId}' not found`);
     return;
   }
 
-  // エフェクトを初期化
   container.classList.add("transition-effect");
 
   fetch(`/${pageName}.html`)
@@ -19,10 +21,9 @@ export function loadContent(elementId, pageName, shouldPushState = true) {
     })
     .then((html) => {
       container.innerHTML = html;
-      // コンテンツのロードが完了した後にエフェクトをアクティブにする
       setTimeout(() => {
-        container.classList.add("transition-active");
-      }, 10); // わずかな遅延を加えてCSSが適用されるのを保証
+        container.classList.add("transition-effect");
+      }, 10);
 
       if (shouldPushState) {
         window.history.pushState(
@@ -31,6 +32,22 @@ export function loadContent(elementId, pageName, shouldPushState = true) {
           `/${pageName}.html`
         );
       }
+
+      // ページに合わせたスクリプトをロード
+      if (scriptLoaders[pageName]) {
+        scriptLoaders[pageName]()
+          .then((module) => {
+            if (module.init) {
+              module.init();
+            }
+          })
+          .catch((err) =>
+            console.error(`Failed to load script for ${pageName}`, err)
+          );
+      }
+
+      // update関数を呼び出し、新しいHTMLにJSを適用
+      update();
     })
     .catch((error) => console.error("Error loading content:", error));
 }
