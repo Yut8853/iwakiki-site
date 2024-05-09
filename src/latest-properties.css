@@ -1,13 +1,6 @@
 @import "./reset.css";
 
-body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  overflow-x: hidden;
-}
-
-.content-container {
+.content-container h1 {
   color: red;
 }
 
